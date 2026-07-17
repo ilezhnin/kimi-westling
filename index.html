@@ -299,7 +299,6 @@ showA.position.set(-14,13,-18); showB.position.set(14,13,-18);
 const showTgtA=new THREE.Object3D(), showTgtB=new THREE.Object3D();
 scene.add(showTgtA,showTgtB); showA.target=showTgtA; showB.target=showTgtB; scene.add(showA,showB);
 
-
 // ============ CANVAS TEXTURES ============
 function canvasTex(w,h,fn){ const cv=document.createElement('canvas'); cv.width=w; cv.height=h; const g=cv.getContext('2d'); fn(g,w,h); const t=new THREE.CanvasTexture(cv); t.anisotropy=4; t.colorSpace=THREE.SRGBColorSpace; return t; }
 const matTex=canvasTex(1024,1024,(g,w,h)=>{
@@ -568,8 +567,7 @@ class Fighter{
   this.tgt=walkPose(this.walkPh,moving?1:0); this.lambda=14;
   const z=this.zone(); const ax=Math.abs(this.pos.x),az=Math.abs(this.pos.z),m=Math.max(ax,az);
   if(z==='ring'){ const lim=RING_HALF-.12; let clamped=false;
-   if(M
-ath.abs(this.pos.x)>lim){ this.pos.x=Math.sign(this.pos.x)*lim; clamped=true; }
+   if(Math.abs(this.pos.x)>lim){ this.pos.x=Math.sign(this.pos.x)*lim; clamped=true; }
    if(Math.abs(this.pos.z)>lim){ this.pos.z=Math.sign(this.pos.z)*lim; clamped=true; }
    if(clamped&&moving){ const side=ring.sideOf(this.pos);
     const outward=(side==='N'?-mz:side==='S'?mz:side==='E'?mx:-mx)>0.4;
@@ -883,8 +881,7 @@ class AI{
   if(z==='floor'){ if(OutC.target===f&&OutC.n>=5){ this.moveTo(0,0,1); if(nearPlatform(f)&&Math.random()<.7) f.cmd.climb=true; return; }
    if(e.zone()==='floor'&&d<1.5){ this.attackChoice(e); return; } }
   if(z==='apron'){ this.moveTo(0,0,1); if(Math.random()<.7) f.cmd.climb=true; return; }
-  if(e.zone()===
-'floor'){ if(Math.random()<.25){ this.moveTo(e.pos.x,e.pos.z,1); if(Math.random()<.4) f.cmd.climb=true; }
+  if(e.zone()==='floor'){ if(Math.random()<.25){ this.moveTo(e.pos.x,e.pos.z,1); if(Math.random()<.4) f.cmd.climb=true; }
    else this.moveTo(0,0,.3); return; }
   if(e.state==='down'){ const want=(e.hpR<.6||e.stR<.4)?.75:.2;
    if(Math.random()<want){ if(d>1.25) this.moveTo(e.pos.x,e.pos.z,1); else f.cmd.pin=true; }
@@ -1156,4 +1153,3 @@ if(Q.has('sel')) setTimeout(()=>toSelect(),300);
 </script>
 </body>
 </html>
-
