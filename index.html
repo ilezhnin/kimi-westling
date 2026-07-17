@@ -1,3 +1,6 @@
+Exit code: 0
+Wall time: 1 seconds
+Output:
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,12 +15,14 @@ html,body{width:100%;height:100%;overflow:hidden;background:#04040a;font-family:
 .hidden{display:none!important}
 .screen{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;pointer-events:auto;background:radial-gradient(ellipse at 50% 30%,rgba(30,20,60,.82),rgba(3,3,10,.94));z-index:30}
 h1.logo{font-family:'Arial Black',Impact,sans-serif;font-size:min(9vw,84px);letter-spacing:4px;line-height:.95;text-align:center;background:linear-gradient(180deg,#ffe259,#ffa751 45%,#ff4e3e);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 4px 0 #5b1a0c) drop-shadow(0 8px 22px rgba(255,90,40,.45));transform:skew(-4deg)}
-.sub{margin-top:12px;color:#9fb3ff;letter-spacing:6px;font-size:14px;text-transform:uppercase}
+.menu-actions{display:flex;flex-direction:column;align-items:center;gap:26px;margin-top:72px}
 .btn{pointer-events:auto;cursor:pointer;margin-top:24px;padding:14px 46px;font-family:'Arial Black',Impact,sans-serif;font-size:19px;letter-spacing:2px;color:#fff;background:linear-gradient(180deg,#c81e3a,#7a0f22);border:2px solid #ff6b81;border-radius:10px;box-shadow:0 6px 0 #4a0a16,0 12px 24px rgba(0,0,0,.6);text-transform:uppercase;transition:transform .08s,filter .08s}
+#titleScreen .menu-actions .btn{margin-top:0;min-width:398px}
 .btn:hover{transform:translateY(-2px) scale(1.03);filter:brightness(1.15)}
 .btn:active{transform:translateY(3px)}
 .btn.ghostb{background:linear-gradient(180deg,#2b3a67,#141c33);border-color:#5b73c4;box-shadow:0 6px 0 #0a0f1f,0 12px 24px rgba(0,0,0,.6)}
-.presskey{margin-top:30px;font-size:16px;letter-spacing:3px;color:#ffd76a;animation:blink 1.2s infinite}
+.presskey{margin-top:54px;font-size:16px;letter-spacing:3px;color:#ffd76a;animation:blink 1.2s infinite}
+@media (max-width:520px){.menu-actions{margin-top:58px;gap:20px}#titleScreen .menu-actions .btn{min-width:min(398px,calc(100vw - 48px));padding:13px 24px;font-size:17px}.presskey{margin-top:44px;font-size:14px;letter-spacing:2px}}
 @keyframes blink{50%{opacity:.25}}
 #selectScreen h2{font-family:'Arial Black',Impact,sans-serif;font-size:32px;letter-spacing:3px;color:#ffe259;text-shadow:0 3px 0 #7a3c00;margin-bottom:16px}
 #grid{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;max-width:1150px;padding:0 12px}
@@ -117,9 +122,10 @@ h1.logo{font-family:'Arial Black',Impact,sans-serif;font-size:min(9vw,84px);lett
 
   <div id="titleScreen" class="screen">
     <h1 class="logo">MAIN<br>EVENT</h1>
-    <div class="sub">wrestling · 3d · fight night</div>
-    <button class="btn" id="btnStart">To the ring!</button>
-    <button class="btn ghostb" id="btnHelp">How to play</button>
+    <div class="menu-actions">
+      <button class="btn" id="btnStart">To the ring!</button>
+      <button class="btn ghostb" id="btnHelp">How to play</button>
+    </div>
     <div class="presskey">or press ENTER</div>
   </div>
 
@@ -295,6 +301,10 @@ const showA=new THREE.SpotLight(0xff3ea5,2.2,80,.3,.5,0), showB=new THREE.SpotLi
 showA.position.set(-14,13,-18); showB.position.set(14,13,-18);
 const showTgtA=new THREE.Object3D(), showTgtB=new THREE.Object3D();
 scene.add(showTgtA,showTgtB); showA.target=showTgtA; showB.target=showTgtB; scene.add(showA,showB);
+Exit code: 0
+Wall time: 1 seconds
+Output:
+
 
 // ============ CANVAS TEXTURES ============
 function canvasTex(w,h,fn){ const cv=document.createElement('canvas'); cv.width=w; cv.height=h; const g=cv.getContext('2d'); fn(g,w,h); const t=new THREE.CanvasTexture(cv); t.anisotropy=4; t.colorSpace=THREE.SRGBColorSpace; return t; }
@@ -564,7 +574,11 @@ class Fighter{
   this.tgt=walkPose(this.walkPh,moving?1:0); this.lambda=14;
   const z=this.zone(); const ax=Math.abs(this.pos.x),az=Math.abs(this.pos.z),m=Math.max(ax,az);
   if(z==='ring'){ const lim=RING_HALF-.12; let clamped=false;
-   if(Math.abs(this.pos.x)>lim){ this.pos.x=Math.sign(this.pos.x)*lim; clamped=true; }
+   if(M
+Exit code: 0
+Wall time: 1 seconds
+Output:
+ath.abs(this.pos.x)>lim){ this.pos.x=Math.sign(this.pos.x)*lim; clamped=true; }
    if(Math.abs(this.pos.z)>lim){ this.pos.z=Math.sign(this.pos.z)*lim; clamped=true; }
    if(clamped&&moving){ const side=ring.sideOf(this.pos);
     const outward=(side==='N'?-mz:side==='S'?mz:side==='E'?mx:-mx)>0.4;
@@ -878,7 +892,11 @@ class AI{
   if(z==='floor'){ if(OutC.target===f&&OutC.n>=5){ this.moveTo(0,0,1); if(nearPlatform(f)&&Math.random()<.7) f.cmd.climb=true; return; }
    if(e.zone()==='floor'&&d<1.5){ this.attackChoice(e); return; } }
   if(z==='apron'){ this.moveTo(0,0,1); if(Math.random()<.7) f.cmd.climb=true; return; }
-  if(e.zone()==='floor'){ if(Math.random()<.25){ this.moveTo(e.pos.x,e.pos.z,1); if(Math.random()<.4) f.cmd.climb=true; }
+  if(e.zone()===
+Exit code: 0
+Wall time: 1 seconds
+Output:
+'floor'){ if(Math.random()<.25){ this.moveTo(e.pos.x,e.pos.z,1); if(Math.random()<.4) f.cmd.climb=true; }
    else this.moveTo(0,0,.3); return; }
   if(e.state==='down'){ const want=(e.hpR<.6||e.stR<.4)?.75:.2;
    if(Math.random()<want){ if(d>1.25) this.moveTo(e.pos.x,e.pos.z,1); else f.cmd.pin=true; }
@@ -1150,3 +1168,4 @@ if(Q.has('sel')) setTimeout(()=>toSelect(),300);
 </script>
 </body>
 </html>
+
